@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../utils/firebaseConfig";
 import {
   Card,
@@ -26,7 +26,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useAuth } from "@/utils/userAuth";
-import Link from "next/link";
 
 // Define the form schema with zod
 const formSchema = z.object({
@@ -47,29 +46,28 @@ export default function Home() {
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     try {
-      console.log("User created successafassfully:");
-      const userCredential = await createUserWithEmailAndPassword(
+      console.log("Attempting user login:");
+      const userCredential = await signInWithEmailAndPassword(
         auth,
         data.email,
         data.password
       );
       const user = userCredential.user;
-      console.log("User created successfully:", user);
-      window.location.href = '/';
-      // Additional actions after user creation
+      console.log("User logged in successfully:", user);
+      // Additional actions after user login
     } catch (error) {
-      console.error("Error creating user:", error);
+      console.error("Error logging in user:", error);
 
-      // Check if the error code is 'auth/email-already-in-use'
+      // Check if the error code is 'auth/user-not-found' or 'auth/wrong-password'
       if (
         isFirebaseError(error) &&
-        error.code === "auth/email-already-in-use"
+        (error.code === "auth/user-not-found" || error.code === "auth/wrong-password")
       ) {
-        // Set the error message for the email field
+        // Set the error message for the email or password field
         form.setError("email", {
           type: "manual",
           message:
-            "This email is already in use. Please use a different email.",
+            "Invalid email or password. Please try again.",
         });
       } else {
         // Handle other types of errors here
@@ -77,6 +75,7 @@ export default function Home() {
       }
     }
   };
+
 
   function isFirebaseError(error: unknown): error is { code: string } {
     return typeof error === "object" && error !== null && "code" in error;
@@ -88,9 +87,9 @@ export default function Home() {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <Card className="w-[450px]">
             <CardHeader>
-              <CardTitle>Sign up</CardTitle>
+              <CardTitle>Log-in</CardTitle>
               <CardDescription>
-                Create new ALB account
+                Log in into your ALB account using credentials
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -135,8 +134,7 @@ export default function Home() {
               />
             </CardContent>
             <CardFooter className="flex justify-between">
-              <Button type="submit">Sign up</Button>
-              <Button variant="outline"><Link href="/login">Login</Link></Button>
+              <Button type="submit">Submit</Button>
             </CardFooter>
           </Card>
         </form>
