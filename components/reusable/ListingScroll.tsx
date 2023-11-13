@@ -5,33 +5,23 @@ import { firestore } from '../../utils/firebaseConfig';
 import { collection, getDocs } from 'firebase/firestore';
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { ListingCard } from "./ListingCard";
+import { Label } from '@radix-ui/react-label';
+import { applyFilter } from '../../utils/firebaseService';
 
-export function ListingScroll() {
-  const [listings, setListings] = useState<Listing[]>([]);
+interface topic {
+  name: string;
+}
 
-  useEffect(() => {
-    const fetchListings = async () => {
-      const querySnapshot = await getDocs(collection(firestore, "listings"));
-      const listingsArray: Listing[] = [];
-      querySnapshot.forEach((doc) => {
-        listingsArray.push({ ...doc.data() as Listing, id: doc.id });
+export async function ListingScroll({name}: topic) {
 
-      });
-      setListings(listingsArray);
-    };
-
-    fetchListings();
-  }, []);
+  const listingsArray: Listing[] = await applyFilter();
 
   return (
-    <div className="w-full p-4">
-      <h1 className="mb-5">Welcome</h1>
-      <ScrollArea className="whitespace-nowrap">
-        <div className="flex space-x-4">
-          {listings.map(listing => <ListingCard key={listing.id} data={listing} />)}
+    <div className="w-full p-4 space-y-5">
+      <Label className="mb-5 text-4xl font-medium">{name}</Label>
+        <div className="flex flex-wrap justify-between grid-cols-3">
+          {listingsArray.map(listing => <ListingCard key={listing.id} data={listing}/>)}
         </div>
-        <ScrollBar orientation="horizontal" />
-      </ScrollArea>
     </div>
   );
 }

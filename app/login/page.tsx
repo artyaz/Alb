@@ -54,6 +54,7 @@ export default function Home() {
       );
       const user = userCredential.user;
       console.log("User logged in successfully:", user);
+      window.location.href = '/';
       // Additional actions after user login
     } catch (error) {
       console.error("Error logging in user:", error);

@@ -125,7 +125,7 @@ const ListingPage = () => {
   }
 
   return (
-    <div className="flex  p-[3%] space-x-5 w-full justify-between">
+    <div className="flex  p-[3%] space-x-5 w-full">
       <div id="details" className=" w-[65%] space-y-7">
         <img
           src={listing.image}
@@ -138,10 +138,11 @@ const ListingPage = () => {
         </div>
         <p className="pl-3">{listing.description}</p>
       </div>
+      <Separator className="h-[400px]" orientation="vertical" />
       <div id="action">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <Card className="w-[450px]">
+            <Card className="w-[450px] rounded-[20px]">
               <CardHeader>
                 <CardTitle>Rent a property</CardTitle>
                 <CardDescription>

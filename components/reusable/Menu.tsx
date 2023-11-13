@@ -13,6 +13,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { Input } from "@/components/ui/input";
 import { useAuth } from "@/utils/userAuth";
 import { auth } from "../../utils/firebaseConfig";
 import { signOut } from "firebase/auth";
