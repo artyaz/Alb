@@ -6,15 +6,18 @@ import { collection, getDocs } from 'firebase/firestore';
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { ListingCard } from "./ListingCard";
 import { Label } from '@radix-ui/react-label';
-import { applyFilter } from '../../utils/firebaseService';
+import { applyFilter, Filter } from '../../utils/firebaseService';
 
 interface topic {
   name: string;
+  filter: Filter;
 }
 
-export async function ListingScroll({name}: topic) {
+export async function ListingScroll({filter, name}: topic) {
 
-  const listingsArray: Listing[] = await applyFilter();
+  const filtersArray: Filter[] = [filter]
+
+  const listingsArray: Listing[] = await applyFilter(filtersArray);
 
   return (
     <div className="w-full md:p-4 space-y-5">

@@ -4,9 +4,9 @@ import React, { useState, useEffect } from 'react';
 import { firestore } from './firebaseConfig';
 import { CollectionReference, Query, collection, getDocs, query, where } from 'firebase/firestore';
 
-type FirestoreOperator = '<' | '<=' | '==' | '>=' | '>' | 'array-contains' | 'in' | 'array-contains-any';
+export type FirestoreOperator = '<' | '<=' | '==' | '>=' | '>' | 'array-contains' | 'in' | 'array-contains-any';
 
-interface Filter {
+export interface Filter {
     operator: FirestoreOperator;
     value: any;
     target: string;
@@ -19,17 +19,20 @@ const filter: Filter = {
 };
 
 const filter2: Filter = {
-    operator: "==",
-    value: "Stary Majdan, Poland",
-    target: "location"
+    operator: "array-contains",
+    value: "cozy",
+    target: "tags"
 };
 
 
-export async function applyFilter() {
+export async function applyFilter(filters: Filter[]) {
     const listingsRef = collection(firestore, "listings");
     let q = query(listingsRef);
-    q = query(q, where(filter.target, filter.operator, filter.value));
-    q = query(q, where(filter2.target, filter2.operator, filter2.value))
+
+    filters.forEach(filter => {
+        q = query(q, where(filter.target, filter.operator, filter.value));
+    });
+
     const listingsArray: Listing[] = await fetchListings(q);
     
     return listingsArray;

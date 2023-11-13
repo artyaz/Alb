@@ -48,7 +48,7 @@ export default function Home() {
     description: z.string(),
     image: z.string().url({ message: "Please enter a valid URL" }),
     price: z.string(),
-    tags: z.array(z.string()),
+    tags: z.array(z.string()).optional(),
   });
 
   type FormData = z.infer<typeof formSchema>;
@@ -65,7 +65,7 @@ export default function Home() {
 
     try {
       // Add the form data to the listings collection
-      await addDoc(collection(firestore, "listings"), data);
+      await addDoc(collection(firestore, "listings"), finalData);
       alert("Listing added successfully"); // Notify the user (optional)
     } catch (error) {
       console.error("Error adding listing:", error);
@@ -256,7 +256,7 @@ export default function Home() {
                       </PopoverContent>
                     </Popover>
                     <FormDescription>
-                      This is the language that will be udsed in the dashboard.
+                      Tags help optimize listing search.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>

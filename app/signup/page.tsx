@@ -84,10 +84,10 @@ export default function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col md:p-24 items-center">
+    <main className="flex min-h-screen flex-col sm:p-24 items-center">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <Card className="w-screen md:w-[450px] border-0 md:border[1px]">
+          <Card className="w-screen sm:w-[450px] border-0 sm:border-[1px] shadow-none sm:shadow-sm">
             <CardHeader>
               <CardTitle>Sign up</CardTitle>
               <CardDescription>

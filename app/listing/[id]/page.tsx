@@ -131,9 +131,9 @@ const ListingPage = () => {
           src={listing.image}
           className=" rounded-[20px] max-h-[400px] w-full object-cover"
         />
-        <div className="flex items-center md:space-x-4 text-sm">
+        <div className="flex items-center space-x-4 text-sm">
           <Label className=" text-[30px] font-medium pl-3">{listing.location}</Label>
-          <Separator orientation="vertical" />
+          <Separator orientation="vertical" className=" h-5"/>
           <p className=" text-gray-600">${listing.price} per night</p>
         </div>
         <p className="pl-3">{listing.description}</p>
