@@ -5,4 +5,5 @@ interface Listing {
     location: string;
     description: string;
     price: number;
+    owner: string;
   }
