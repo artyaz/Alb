@@ -26,6 +26,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useAuth } from "@/utils/userAuth";
+import { Separator } from "@/components/ui/separator";
 
 // Define the form schema with zod
 const formSchema = z.object({
@@ -83,10 +84,10 @@ export default function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col p-24 items-center">
+    <main className="flex min-h-screen flex-col md:p-24 items-center">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <Card className="w-[450px]">
+          <Card className="w-screen md:w-[450px] border-0 md:border[1px]">
             <CardHeader>
               <CardTitle>Log-in</CardTitle>
               <CardDescription>
@@ -103,7 +104,7 @@ export default function Home() {
                     <FormControl>
                       <Input
                         {...field}
-                        className="w-[400px]"
+                        className="md:w-[400px]"
                         placeholder="email@example.com"
                       />
                     </FormControl>
@@ -124,7 +125,7 @@ export default function Home() {
                       <Input
                         {...field}
                         type="password"
-                        className="w-[400px]"
+                        className="md:w-[400px]"
                         placeholder="Password"
                       />
                     </FormControl>
@@ -134,6 +135,7 @@ export default function Home() {
                 )}
               />
             </CardContent>
+            <Separator className="mb-5"/>
             <CardFooter className="flex justify-between">
               <Button type="submit">Submit</Button>
             </CardFooter>

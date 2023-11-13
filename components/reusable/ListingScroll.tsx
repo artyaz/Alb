@@ -17,9 +17,9 @@ export async function ListingScroll({name}: topic) {
   const listingsArray: Listing[] = await applyFilter();
 
   return (
-    <div className="w-full p-4 space-y-5">
+    <div className="w-full md:p-4 space-y-5">
       <Label className="mb-5 text-4xl font-medium">{name}</Label>
-        <div className="flex flex-wrap justify-between grid-cols-3">
+        <div className="md:flex md:flex-wrap justify-between md:grid-cols-3">
           {listingsArray.map(listing => <ListingCard key={listing.id} data={listing}/>)}
         </div>
     </div>

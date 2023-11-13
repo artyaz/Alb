@@ -125,24 +125,24 @@ const ListingPage = () => {
   }
 
   return (
-    <div className="flex  p-[3%] space-x-5 w-full">
-      <div id="details" className=" w-[65%] space-y-7">
+    <div className=" space-y-5 lg:flex p-[3%] lg:space-x-5 w-full">
+      <div id="details" className=" w-full space-y-7">
         <img
           src={listing.image}
           className=" rounded-[20px] max-h-[400px] w-full object-cover"
         />
-        <div className="flex h-5 items-center space-x-4 text-sm">
-          <h1 className=" text-[30px] font-medium pl-3">{listing.location}</h1>
+        <div className="flex items-center md:space-x-4 text-sm">
+          <Label className=" text-[30px] font-medium pl-3">{listing.location}</Label>
           <Separator orientation="vertical" />
           <p className=" text-gray-600">${listing.price} per night</p>
         </div>
         <p className="pl-3">{listing.description}</p>
       </div>
-      <Separator className="h-[400px]" orientation="vertical" />
+      <Separator className="lg:h-[400px]" orientation="vertical" />
       <div id="action">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <Card className="w-[450px] rounded-[20px]">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 md:min-w-[400px]">
+            <Card className=" rounded-[20px]">
               <CardHeader>
                 <CardTitle>Rent a property</CardTitle>
                 <CardDescription>
@@ -162,7 +162,7 @@ const ListingPage = () => {
                             id="date"
                             variant={"outline"}
                             className={cn(
-                              "w-[300px] justify-start text-left font-normal",
+                              "w-full justify-start text-left font-normal",
                               !date && "text-muted-foreground"
                             )}
                           >

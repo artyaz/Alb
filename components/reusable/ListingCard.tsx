@@ -11,7 +11,7 @@ interface ListingCardProps {
 export function ListingCard({ data }: ListingCardProps) {
 
   return (
-    <div className="sm:w-[200px] lg:w-[250px] xl:w-[300px] 2xl:w-[350px]">
+    <div className="w-full sm:w-[300px]">
     <a href={`/listing/find?id=${data.id}`} className="w-full">
     <Card className='mt-5'>
       <CardContent className="p-0">

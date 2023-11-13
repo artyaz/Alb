@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <nav className=' flex justify-between items-center p-3 px-10 border-b-[1px]'>
+        <nav className=' flex justify-between items-center p-3 md:px-10 border-b-[1px]'>
           <b><h1>ALB </h1></b>
           <Menu />
         </nav>
